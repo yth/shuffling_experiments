@@ -256,12 +256,17 @@ def twice_shuffled(num_shards, parallel_reads):
         shuffled_shards.append(pseudoshuffle(subshards, buffer_size=buffer_size, parallel_reads=parallel_reads))
     return pseudoshuffle(shuffled_shards, buffer_size=buffer_size, parallel_reads=parallel_reads)
 
-for i in range(1, 6):
-    make_hilbert_curve_svg(i, os.path.join(OUTPUT_DIR, 'hilbert_curve_{}.svg'.format(i)))
+def main():
 
-create_img_table(basic_scaling, (1024, 4096, 16384), (0, 0.01, 0.1, 0.5, 1))
-create_img_table(chained_scaling, (0, 0.01, 0.1, 0.5), (1, 2, 4))
-create_img_table(sharded_scaling, (0, 0.01, 0.1, 0.5), (1, 2, 4, 8))
-create_img_table(parallel_read_scaling, (1, 2, 4, 8), (1, 2, 4, 8))
-create_img_table(parallel_read_scaling_jittered, (1, 2, 4, 8), (1, 2, 4, 8))
-create_img_table(twice_shuffled, (1, 2, 4, 8), (1, 2, 4, 8))
+    for i in range(1, 6):
+        make_hilbert_curve_svg(i, os.path.join(OUTPUT_DIR, 'hilbert_curve_{}.svg'.format(i)))
+
+    create_img_table(basic_scaling, (1024, 4096, 16384), (0, 0.01, 0.1, 0.5, 1))
+    create_img_table(chained_scaling, (0, 0.01, 0.1, 0.5), (1, 2, 4))
+    create_img_table(sharded_scaling, (0, 0.01, 0.1, 0.5), (1, 2, 4, 8))
+    create_img_table(parallel_read_scaling, (1, 2, 4, 8), (1, 2, 4, 8))
+    create_img_table(parallel_read_scaling_jittered, (1, 2, 4, 8), (1, 2, 4, 8))
+    create_img_table(twice_shuffled, (1, 2, 4, 8), (1, 2, 4, 8))
+
+if __name__ == "__main__":
+    main()
